@@ -1,7 +1,7 @@
-'''
+"""
 Magnetic lattice simulation by Ben Kimock 2015 based work by
 Bruce Edward Hubbard, Masayuki Sato, Lars English 02 July 2001
-'''
+"""
 
 import numpy as np
 import os
@@ -21,9 +21,9 @@ now = datetime.now
 
 # Determine name
 if afm:
-    name = '%.2f'%beta+'_afm'
+    name = '%.2f' % beta + '_afm'
 else:
-    name = '%.2f'%beta+'_fer'
+    name = '%.2f' % beta + '_fer'
 
 if skyrmion:
     name = '_skyrm'
