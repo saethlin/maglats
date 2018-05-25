@@ -6,7 +6,6 @@ import numba
 import numpy as np
 from scipy.misc import imsave
 from tqdm import tqdm
-import cv2
 
 from RK4 import RK4
 from neighborsum import neighborsum

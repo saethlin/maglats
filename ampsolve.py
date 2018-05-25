@@ -3,7 +3,7 @@ This file handles a bunch of additional setup- it is seperated from parameters
 so that parameters contains only the values that can/should be changed
 '''
 
-from config import *
+from parameters import *
 import numpy as np
 from scipy.optimize import fsolve
 

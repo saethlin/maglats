@@ -13,12 +13,12 @@ beta = -1 / 3
 # Simulation Length
 periods = 500
 # Skyrmion?
-skyrmions = []
+skyrmion = False
 
 # Amplitude of the noise field
 ininl = 0.01
 
-if skyrmions:
+if skyrmion:
     afm = False
     beta = 0
     periods = 100
@@ -45,7 +45,7 @@ D = np.array([0, 0, 100.])
 A = -D[2] / J
 
 # Determines strength of the demagnetizing field
-M0 = 400
+M0 = 400.0
 
 # This should be the frequency of the uniform mode
 wafmr = 447.2
@@ -66,6 +66,6 @@ lmbda = np.zeros((Nz, Nz, 3))
 H_applied = np.array([0, 0, 0])
 
 # Demagnetization Diagonal Matrix
-N = np.array([beta,
+N = np.array((beta,
               beta,
-              -2 * beta])
+              -2 * beta))
