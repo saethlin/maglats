@@ -61,7 +61,8 @@ def put_skyrmion(spin, size, y, x, regular):
     # x and y positions along the skyrmion array from the center
     ypos, xpos = np.mgrid[-size:size + 1, -size:size + 1].astype(float)
 
-    # The x and y coordinates are the vector components (roughly) for a hedgehog
+    # The x and y coordinates are the vector components (roughly) for a
+    # hedgehog
     new[..., 0] = xpos
     new[..., 1] = ypos
 

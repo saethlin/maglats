@@ -5,7 +5,8 @@ and the sum of the six nearest if triangular == True
 import numpy as np
 import numba
 
-@numba.jit(nopython=True)
+
+@numba.jit(nopython=True, cache=True)
 def neighborsum(arr):
     result = np.zeros(arr.shape)
 

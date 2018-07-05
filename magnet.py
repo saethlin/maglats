@@ -4,7 +4,9 @@ import numba
 Finds the magnetization from spin, by applying a mean over all the spatial
 axes of the system. The last axis specifies x,y,z.
 '''
-@numba.jit(nopython=True)
+
+
+@numba.jit(nopython=True, cache=True)
 def magnet(spin):
     '''
     if spin.ndim == 2:
@@ -22,4 +24,3 @@ def magnet(spin):
     y = np.mean(spin[:, :, 1])
     z = np.mean(spin[:, :, 2])
     return M0 * np.array((x, y, z))
-

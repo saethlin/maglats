@@ -8,7 +8,8 @@ from magnet import magnet
 from neighborsum import neighborsum
 import numba
 
-@numba.jit(nopython=True)
+
+@numba.jit(nopython=True, cache=True)
 def cross(a, b):
     output = np.empty_like(a)
     output[:, :, 0] = a[:, :, 1] * b[:, :, 2] - a[:, :, 2] * b[:, :, 1]
@@ -16,7 +17,8 @@ def cross(a, b):
     output[:, :, 2] = a[:, :, 0] * b[:, :, 1] - a[:, :, 1] * b[:, :, 0]
     return output
 
-@numba.jit(nopython=True)
+
+@numba.jit(nopython=True, cache=True)
 def effective_field(spin):
 
     H_eff = (2 * J * neighborsum(spin)) + (2 * D * spin)

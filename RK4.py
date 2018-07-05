@@ -1,5 +1,6 @@
 import numba
 
+
 @numba.jit(nopython=True)
 def RK4(y, update, h):
     k1 = update(y)

@@ -22,8 +22,15 @@ spec = [
 
 @numba.jitclass(spec)
 class Lattice:
-    def __init__(self, ndim, Nz, shape_parameter, interlayer_coupling, anisotropy, demag_strength,
-                 noise_amplitude):
+    def __init__(
+            self,
+            ndim,
+            Nz,
+            shape_parameter,
+            interlayer_coupling,
+            anisotropy,
+            demag_strength,
+            noise_amplitude):
 
         self.demag_strength = demag_strength  # M0
         self.anisotropy = anisotropy  # D
@@ -35,7 +42,8 @@ class Lattice:
         self.spin[..., 0] = 0.812
 
         # Add noise
-        self.spin[..., 0] += noise_amplitude * (np.random.rand(Nz, Nz) - 0.5) * 2
+        self.spin[..., 0] += noise_amplitude * \
+            (np.random.rand(Nz, Nz) - 0.5) * 2
 
         # normalize the spins by the z component
         self.spin[..., 2] = np.sqrt(1 - self.spin[..., 0] ** 2)
@@ -50,15 +58,19 @@ class Lattice:
         # self.spin /= np.sqrt(np.sum(self.spin**2, axis=-1))[:, :, None]
 
     def effective_field(self, spin):
-        H_eff = (2 * self.interlayer_coupling * neighborsum(spin)) + (2 * self.anisotropy * spin)
+        H_eff = (2 * self.interlayer_coupling * neighborsum(spin)) + \
+            (2 * self.anisotropy * spin)
 
         if self.shape_parameter != 0:
             H_eff -= self.demag_diagonal * self.magnetization()
 
         output = np.empty_like(self.spin)
-        output[..., 0] = (self.spin[..., 2] * H_eff[..., 3]) - (self.spin[..., 3] * H_eff[..., 2])
-        output[..., 1] = (self.spin[..., 3] * H_eff[..., 1]) - (self.spin[..., 1] * H_eff[..., 3])
-        output[..., 2] = (self.spin[..., 1] * H_eff[..., 2]) - (self.spin[..., 2] * H_eff[..., 1])
+        output[..., 0] = (self.spin[..., 2] * H_eff[..., 3]) - \
+            (self.spin[..., 3] * H_eff[..., 2])
+        output[..., 1] = (self.spin[..., 3] * H_eff[..., 1]) - \
+            (self.spin[..., 1] * H_eff[..., 3])
+        output[..., 2] = (self.spin[..., 1] * H_eff[..., 2]) - \
+            (self.spin[..., 2] * H_eff[..., 1])
 
         return output
         # return np.cross(self.spin, H_eff)
@@ -72,10 +84,17 @@ class Lattice:
         # return self.demag_strength * np.mean(self.spin, axis=(0, 1))
 
     def energy(self):
-        # Components of the lattice energy: exchange, anisotropy, demagnetization
-        en_exch = -np.sum(self.interlayer_coupling * self.spin * neighborsum(self.spin), axis=-1)
+        # Components of the lattice energy: exchange, anisotropy,
+        # demagnetization
+        en_exch = -np.sum(self.interlayer_coupling *
+                          self.spin * neighborsum(self.spin), axis=-1)
         en_anis = -np.sum(self.anisotropy * self.spin ** 2, axis=-1)
-        en_demag = np.sum(self.demag_diagonal * self.spin * self.magnetization(), axis=-1)
+        en_demag = np.sum(
+            self.demag_diagonal *
+            self.spin *
+            self.magnetization(),
+            axis=-
+            1)
 
         return en_exch + en_anis + en_demag
 

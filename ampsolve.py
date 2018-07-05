@@ -10,10 +10,8 @@ from scipy.optimize import fsolve
 
 # Spin setup- See Lars English's PhD Thesis for source
 def alphasolve(alpha, f):
-    return (2 + A - 2 / alpha + beta * (1 - 1 / alpha)) * np.sqrt(1 - alpha ** 2 * f ** 2) + (
-                                                                                                 2 + A - 2 * alpha + beta * (
-                                                                                                     1 - alpha)) * np.sqrt(
-        1 - f ** 2)
+    return (2 + A - 2 / alpha + beta * (1 - 1 / alpha)) * np.sqrt(1 - alpha ** 2 *
+                                                                  f ** 2) + (2 + A - 2 * alpha + beta * (1 - alpha)) * np.sqrt(1 - f ** 2)
 
 
 def B(f, alpha, g):
@@ -23,15 +21,15 @@ def B(f, alpha, g):
 
 
 def C(f, alpha, g):
-    return -(1 / 2 * (2 + beta - beta * alpha) * A + 2) * f ** 2 - 2 / alpha * np.sqrt(
-        (1 - f ** 2) * (1 - g ** 2)) + alpha / 2 * (2 + beta) ** 2 - beta * (beta + 2) + beta ** 2 / (2 * alpha)
+    return -(1 / 2 * (2 + beta - beta * alpha) * A + 2) * f ** 2 - 2 / alpha * np.sqrt((1 - f ** 2)
+                                                                                       * (1 - g ** 2)) + alpha / 2 * (2 + beta) ** 2 - beta * (beta + 2) + beta ** 2 / (2 * alpha)
 
 
 def F(f, alpha, g):
     return beta * (2 + beta) * (alpha + 1 / alpha - 2) * (beta * (2 + beta) * (
         alpha + 1 / alpha - 2) - A * (2 + beta) * (alpha ** 2 + 1 / (alpha ** 2)) * f * g - A * beta * (
-                                                              f ** 2 + g ** 2) - A ** 2 * (f * g) ** 2 + 4 * (
-                                                              E(f, alpha, g) ** 2 - 1))
+        f ** 2 + g ** 2) - A ** 2 * (f * g) ** 2 + 4 * (
+        E(f, alpha, g) ** 2 - 1))
 
 
 def E(f, g):
